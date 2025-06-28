@@ -9,7 +9,7 @@ namespace commands
     class CommandParser
     {
     public :
-        static ICommand* Parse(String string);
+        static ICommand* Parse(String command);
     };
 } // commands
 

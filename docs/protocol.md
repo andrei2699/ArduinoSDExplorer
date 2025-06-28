@@ -19,6 +19,7 @@ card initialization.
 
 | Command        | Direction        | Description                           | Arguments                      | Response                                                    | Details                      |
 |----------------|------------------|---------------------------------------|--------------------------------|-------------------------------------------------------------|------------------------------|
+| `INFO`         | Client → Arduino | Print SD card info                    | None                           | Card info, then `OK END`                                    | [See details](#info)         |
 | `LIST`         | Client → Arduino | List all files and folders on SD card | None                           | Multiple: `ENTRY <path> <type> <size>`, then `OK END`       | [See details](#list)         |
 | `LISTFOLDER`   | Client → Arduino | List contents of a specific folder    | `<folderpath>`                 | Multiple: `ENTRY <path> <type> <size>`, then `OK END`       | [See details](#listfolder)   |
 | `READFILE`     | Client → Arduino | Read a file in chunks                 | `<filepath>`                   | `OK START SIZE=<size>`, then `DATA <base64>`, then `OK END` | [See details](#readfile)     |
@@ -31,6 +32,27 @@ card initialization.
 | `DELETEFOLDER` | Client → Arduino | Delete a folder and its contents      | `<folderpath>`                 | `OK DELETED`                                                | [See details](#deletefolder) |
 | `OK`           | Arduino → Client | Success acknowledgment                | Optional message               | None                                                        | [See details](#ok-and-err)   |
 | `ERR`          | Arduino → Client | Error message                         | Error description              | None                                                        | [See details](#ok-and-err)   |
+
+---
+
+## <a name="info"></a>INFO
+
+**Description:**  
+Prints information about the SD card, including type, size, and available space.
+
+**Usage:**  
+Client → Arduino:  
+`INFO`
+
+**Response:**
+
+Card type: SD1
+
+- `OK END`
+
+**Errors:**
+
+- `ERR SDInitFailed`
 
 ---
 
