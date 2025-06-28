@@ -9,6 +9,8 @@ public static class ServiceCollectionExtensions
     public static void AddCommonServices(this IServiceCollection services)
     {
         services.AddTransient<IComPortsLoaderService, ComPortsLoaderService>()
+            .AddTransient<ISdCardOperationsService, SdCardOperationsService>()
+            .AddSingleton<ILoggerService, LoggerService>()
             .AddTransient<MainWindowViewModel>();
     }
 }

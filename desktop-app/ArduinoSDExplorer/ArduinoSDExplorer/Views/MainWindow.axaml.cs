@@ -15,7 +15,7 @@ public partial class MainWindow : Window
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            viewModel.LoadComPorts();
+            viewModel.LoadComPortsCommand();
         }
     }
 }
