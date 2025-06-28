@@ -8,3 +8,7 @@ A Windows desktop application for exploring and managing files on an Arduino SD 
 - Connect to Arduino devices
 - Browse SD card contents
 - Upload, download, and delete files on the SD card
+
+## Protocol Documentation
+
+See [protocol.md](protocol.md) for details about the serial communication protocol used between the application and Arduino.
