@@ -14,6 +14,6 @@ A Windows desktop application for exploring and managing files on an Arduino SD 
 - [protocol.md](docs/protocol.md) for details about the serial communication protocol used between the application and
   Arduino.
 
-- [schematic.svg](docs/schematic.svg) for the schematic of the Arduino setup.
+- [schematics](docs/schematics) for the schematic of the Arduino setup.
 
-![schematic](docs/schematic.svg)
+![schematic](docs/schematics/schematic_mega.svg)

@@ -31,7 +31,7 @@ card initialization.
 | `DELETEFILE`   | Client → Arduino | Delete a file                         | `<filepath>`                   | `OK DELETED`                                                | [See details](#deletefile)   |
 | `DELETEFOLDER` | Client → Arduino | Delete a folder and its contents      | `<folderpath>`                 | `OK DELETED`                                                | [See details](#deletefolder) |
 | `OK`           | Arduino → Client | Success acknowledgment                | Optional message               | None                                                        | [See details](#ok-and-err)   |
-| `ERR`          | Arduino → Client | Error message                         | Error description              | None                                                        | [See details](#ok-and-err)   |
+| `ERR`          | Arduino → Client | Error message                         | Error description `[details]`  | None                                                        | [See details](#ok-and-err)   |
 
 ---
 
@@ -53,6 +53,9 @@ Card type: SD1
 **Errors:**
 
 - `ERR SDInitFailed`
+- `ERR ReadInfoFailed`
+- `ERR ReadMBRFailed`
+- `ERR ReadVolumeFailed`
 
 ---
 
@@ -288,19 +291,23 @@ Arduino → Client:
 
 - `OK` responses acknowledge successful command or data receipt, optionally with additional info (e.g.,
   `OK START SIZE=...`).
-- `ERR` responses indicate errors and include an error message.
+- `ERR` responses indicate errors and include an error message, including details if applicable. (e.g.
+  `ERR SDInitFailed SYMBOL SD_CARD_ERROR_CMD0 CODE 1 DATA 255`)
 
 **Common Error Messages:**
 
 | Error Message            | Meaning                                       |
 |--------------------------|-----------------------------------------------|
+| `ERR SDInitFailed`       | Failed to initialize SD card                  |
+| `ERR ReadInfoFailed`     | Failed to read info                           |
+| `ERR ReadMBRFailed`      | Failed to Master Boot Record info             |
+| `ERR ReadVolumeFailed`   | Failed to Volume info                         |
 | `ERR FileNotFound`       | File does not exist or cannot be opened       |
 | `ERR FolderNotFound`     | Folder does not exist                         |
 | `ERR MissingPath`        | Required file or folder path argument missing |
 | `ERR MissingSize`        | Required size argument missing                |
 | `ERR FileOpenFailed`     | Failed to open file for writing               |
 | `ERR NotInWriteMode`     | `DATA` or `END` sent outside a write session  |
-| `ERR SDInitFailed`       | Failed to initialize SD card                  |
 | `ERR UnknownCommand`     | Unknown or unsupported command                |
 | `ERR DeleteFailed`       | Failed to delete file or folder               |
 | `ERR InvalidConfigKey`   | Provided config key is invalid                |

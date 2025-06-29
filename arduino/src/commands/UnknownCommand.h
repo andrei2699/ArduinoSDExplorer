@@ -8,7 +8,14 @@ namespace commands
     class UnknownCommand final : public ICommand
     {
     public:
-        void execute() override;
+        explicit UnknownCommand(const String& command): command(command)
+        {
+        }
+
+        void execute(SdSpiConfig config, SdFs& sd) override;
+
+    private:
+        String command;
     };
 } // commands
 

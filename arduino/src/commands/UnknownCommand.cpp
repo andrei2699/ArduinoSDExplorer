@@ -3,8 +3,9 @@
 
 namespace commands
 {
-    void UnknownCommand::execute()
+    void UnknownCommand::execute(SdSpiConfig config, SdFs& sd)
     {
-        Serial.println("ERR UnknownCommand");
+        Serial.print("ERR UnknownCommand ");
+        Serial.println(command);
     }
 } // commands

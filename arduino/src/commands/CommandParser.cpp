@@ -1,6 +1,7 @@
 ﻿#include "CommandParser.h"
 
 #include "InfoCommand.h"
+#include "ListCommand.h"
 #include "UnknownCommand.h"
 
 namespace commands
@@ -14,6 +15,11 @@ namespace commands
             return new InfoCommand();
         }
 
-        return new UnknownCommand();
+        if (command.equals("LIST"))
+        {
+            return new ListCommand();
+        }
+
+        return new UnknownCommand(command);
     }
 } // commands
