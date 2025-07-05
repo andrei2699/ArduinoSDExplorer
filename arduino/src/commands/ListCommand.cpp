@@ -3,9 +3,9 @@
 
 namespace commands
 {
-    void ListCommand::execute(const SdSpiConfig config, SdFs& sd)
+    void ListCommand::execute(sd::SdCardController& sdCard)
     {
-        if (!init(config, sd))
+        if (!sdCard.initialize())
         {
             return;
         }

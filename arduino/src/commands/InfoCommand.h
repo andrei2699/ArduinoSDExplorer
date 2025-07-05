@@ -8,7 +8,7 @@ namespace commands
     class InfoCommand final : public ICommand
     {
     public:
-        void execute(SdSpiConfig config, SdFs& sd) override;
+        void execute(sd::SdCardController& sdCard) override;
 
     private:
         static void print_card_type(SdFs& sd);

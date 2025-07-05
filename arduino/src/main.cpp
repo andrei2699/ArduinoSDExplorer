@@ -1,11 +1,13 @@
 ﻿#include <Arduino.h>
 #include "SdFat.h"
 #include "commands/CommandParser.h"
+#include "sd/SdCardController.h"
 
 constexpr uint8_t SD_CS_PIN = SS;
 
 auto sdConfig = SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16));
-SdFs sd;
+SdFs sdfs;
+sd::SdCardController sdCard(sdConfig, sdfs);
 
 constexpr int SD_CARD_CHIP_SELECT_PIN = 10;
 
@@ -36,5 +38,5 @@ void loop()
     }
 
     commands::ICommand* command = commands::CommandParser::Parse(cmd);
-    command->execute(sdConfig, sd);
+    command->execute(sdCard);
 }

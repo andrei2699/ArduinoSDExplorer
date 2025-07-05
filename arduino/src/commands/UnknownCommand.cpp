@@ -3,7 +3,7 @@
 
 namespace commands
 {
-    void UnknownCommand::execute(SdSpiConfig config, SdFs& sd)
+    void UnknownCommand::execute(sd::SdCardController& sdCard)
     {
         Serial.print("ERR UnknownCommand ");
         Serial.println(command);

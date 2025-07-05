@@ -8,7 +8,7 @@ namespace commands
     class ListCommand final : public ICommand
     {
     public:
-        void execute(SdSpiConfig config, SdFs& sd) override;
+        void execute(sd::SdCardController& sdCard) override;
     };
 } // commands
 

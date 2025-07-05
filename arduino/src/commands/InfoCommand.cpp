@@ -12,17 +12,19 @@ uint8_t cmd6Data[64];
 
 namespace commands
 {
-    void InfoCommand::execute(const SdSpiConfig config, SdFs& sd)
+    void InfoCommand::execute(sd::SdCardController& sdCard)
     {
-        if (!init_low_level(config, sd))
+        if (!sdCard.initialize_low_level())
         {
             return;
         }
 
+        SdFs& sd = sdCard.getSdFs();
+
         if (!sd.card()->readCID(&cid) || !sd.card()->readCSD(&csd) ||
             !sd.card()->readOCR(&ocr) || !sd.card()->readSCR(&scr))
         {
-            print_error(sd, "ReadInfoFailed");
+            sdCard.print_error("ReadInfoFailed");
             return;
         }
 
@@ -39,14 +41,14 @@ namespace commands
 
         if (!retry_operation(print_master_boot_record, sd))
         {
-            print_error(sd, "ReadMBRFailed");
+            sdCard.print_error("ReadMBRFailed");
             return;
         }
 
         Serial.println();
         if (!retry_operation(print_volume, sd))
         {
-            print_error(sd, "ReadVolumeFailed");
+            sdCard.print_error("ReadVolumeFailed");
             return;
         }
 

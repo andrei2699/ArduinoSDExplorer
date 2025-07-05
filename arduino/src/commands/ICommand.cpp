@@ -1,44 +1,26 @@
 ﻿#include "ICommand.h"
 
+#include "sd/SdCardController.h"
+
 namespace commands
 {
-    bool ICommand::init(const SdSpiConfig& config, SdFs& sd)
+    bool ICommand::init(sd::SdCardController& sdCard)
     {
-        if (!sd.begin(config))
+        if (!sdCard.initialize())
         {
-            print_error(sd, "SDInitFailed");
+            sdCard.print_error("SDInitFailed");
             return false;
         }
         return true;
     }
 
-    bool ICommand::init_low_level(const SdSpiConfig& config, SdFs& sd)
+    bool ICommand::init_low_level(sd::SdCardController& sdCard)
     {
-        if (!sd.cardBegin(config))
+        if (!sdCard.initialize_low_level())
         {
-            print_error(sd, "SDInitFailed");
+            sdCard.print_error("SDInitFailed");
             return false;
         }
         return true;
-    }
-
-    void ICommand::print_error(SdFs& sd, const String& error)
-    {
-        if (sd.sdErrorCode())
-        {
-            Serial.print("ERR ");
-            Serial.print(error);
-            Serial.print(" SYMBOL ");
-            printSdErrorSymbol(&Serial, sd.sdErrorCode());
-            Serial.print(" CODE ");
-            Serial.print(static_cast<int>(sd.sdErrorCode()));
-            Serial.print(" DATA ");
-            Serial.println(static_cast<int>(sd.sdErrorData()));
-        }
-        else
-        {
-            Serial.print("ERR ");
-            Serial.println(error);
-        }
     }
 } // commands

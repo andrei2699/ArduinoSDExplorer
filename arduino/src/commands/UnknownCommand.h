@@ -12,7 +12,7 @@ namespace commands
         {
         }
 
-        void execute(SdSpiConfig config, SdFs& sd) override;
+        void execute(sd::SdCardController& sdCard) override;
 
     private:
         String command;
