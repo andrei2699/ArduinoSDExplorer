@@ -5,7 +5,7 @@
 
 constexpr uint8_t SD_CS_PIN = SS;
 
-auto sdConfig = SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(16));
+auto sdConfig = SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_HALF_SPEED);
 SdFs sdfs;
 sd::SdCardController sdCard(sdConfig, sdfs);
 

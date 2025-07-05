@@ -18,20 +18,6 @@ namespace commands
         static void print_ocr();
         static bool print_master_boot_record(SdFs& sd);
         static bool print_volume(SdFs& sd);
-
-        static bool retry_operation(bool (*function)(SdFs& sd), SdFs& sd, const int retries = 3)
-        {
-            for (int i = 0; i < retries; ++i)
-            {
-                if (function(sd))
-                {
-                    return true;
-                }
-                Serial.println("retrying...");
-                delay(1000);
-            }
-            return false;
-        }
     };
 } // commands
 

@@ -9,9 +9,11 @@ namespace sd
             return true;
         }
 
+        sd.end();
         if (!sd.begin(config))
         {
             initializationType = NOT_INITIALIZED;
+            print_error("SDInitFailed");
             return false;
         }
 
@@ -26,9 +28,11 @@ namespace sd
             return true;
         }
 
+        sd.end();
         if (!sd.cardBegin(config))
         {
             initializationType = NOT_INITIALIZED;
+            print_error("SDInitFailed");
             return false;
         }
 

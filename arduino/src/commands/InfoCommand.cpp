@@ -39,14 +39,14 @@ namespace commands
         print_ocr();
         Serial.println();
 
-        if (!retry_operation(print_master_boot_record, sd))
+        if (!print_master_boot_record(sd))
         {
             sdCard.print_error("ReadMBRFailed");
             return;
         }
 
         Serial.println();
-        if (!retry_operation(print_volume, sd))
+        if (!print_volume(sd))
         {
             sdCard.print_error("ReadVolumeFailed");
             return;

@@ -3,6 +3,7 @@
 #include "InfoCommand.h"
 #include "ListCommand.h"
 #include "UnknownCommand.h"
+#include "WriteFileCommand.h"
 
 namespace commands
 {
@@ -18,6 +19,11 @@ namespace commands
         if (command.equals("LIST"))
         {
             return new ListCommand();
+        }
+
+        if (command.equals("WRITE"))
+        {
+            return new WriteFileCommand();
         }
 
         return new UnknownCommand(command);
